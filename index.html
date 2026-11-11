@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Markdown 探險樂園</title>
+<style>
+:root{--bg:#F1F7FF;--card:#fff;--ink:#1D2540;--mut:#566086;--blue:#2F7BFF;--pink:#F0407A;--yel:#FFC83D;--mint:#12A878;--vio:#7B52F0;--line:#D6E2FA;--code:#F3EEFF;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121830;--card:#1D2548;--ink:#F1F4FF;--mut:#A9B3D9;--blue:#5B9BFF;--pink:#FF6B98;--mint:#34D3A0;--vio:#A184FF;--line:#344172;--code:#262F5C}}
+:root[data-theme="dark"]{--bg:#121830;--card:#1D2548;--ink:#F1F4FF;--mut:#A9B3D9;--blue:#5B9BFF;--pink:#FF6B98;--mint:#34D3A0;--vio:#A184FF;--line:#344172;--code:#262F5C}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{font-size:18px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.8}
+header{background:linear-gradient(120deg,var(--blue),var(--vio) 55%,var(--pink));color:#fff;padding:1.2rem 1rem 1.4rem}
+.wrap{max-width:1000px;margin:0 auto;padding:0 1rem}
+header .wrap{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.logo{width:3.6rem;height:3.6rem;border-radius:1rem;background:var(--yel);color:#1D2540;font-weight:900;font-size:1.6rem;display:grid;place-items:center;transform:rotate(-6deg)}
+h1{margin:0;font-size:1.9rem;line-height:1.3}header p{margin:0;opacity:.95}
+.prog{margin-left:auto;min-width:200px}
+.bar{height:.8rem;background:rgba(255,255,255,.3);border-radius:1rem;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--yel);border-radius:1rem;transition:width .5s}
+main .bar{background:var(--line)}
+nav{display:flex;gap:.6rem;flex-wrap:wrap;padding:1rem 0}
+nav a{padding:.5rem 1.1rem;border-radius:2rem;border:3px solid var(--c);color:var(--c);font-weight:700;text-decoration:none;background:var(--card)}
+nav a.on{background:var(--c);color:#fff}
+nav button{margin-left:auto}
+.card{background:var(--card);border-radius:1.2rem;border:2px solid var(--line);border-left:10px solid var(--c,var(--blue));padding:1.2rem 1.4rem;margin-bottom:1.4rem}
+.card h3,.card h2{margin:0 0 .4rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:720px){.two{grid-template-columns:1fr}h1{font-size:1.5rem}.prog{margin-left:0;width:100%}}
+pre{background:var(--code);padding:.8rem 1rem;border-radius:.8rem;overflow-x:auto;margin:.4rem 0;font-size:.95rem;line-height:1.6}
+code{background:var(--code);padding:.05rem .4rem;border-radius:.4rem;font-size:.95em}pre code{padding:0;background:none}
+.out{background:var(--bg);border-radius:.8rem;padding:.4rem 1rem;min-height:4rem;overflow-x:auto}
+.out h1,.out h2,.out h3{margin:.4rem 0}.out blockquote{margin:.5rem 0;padding:.2rem 1rem;border-left:6px solid var(--yel);background:var(--card);border-radius:.4rem}
+.out table{border-collapse:collapse}.out td,.out th{border:2px solid var(--line);padding:.2rem .8rem}.out th{background:var(--code)}
+.out li.task{list-style:none;margin-left:-1.2rem}.out .img{background:var(--yel);color:#1D2540;padding:.1rem .6rem;border-radius:.5rem}
+.out a{color:var(--blue)}
+.btn,button{font:inherit;font-weight:700;border:0;border-radius:2rem;padding:.55rem 1.3rem;cursor:pointer;background:var(--c,var(--blue));color:#fff;transition:transform .1s}
+.btn:hover,button:hover{transform:translateY(-2px)}button:active{transform:scale(.96)}
+.ghost{background:var(--card)!important;color:var(--ink)!important;border:2px solid var(--line)}
+.done{background:var(--mint)!important}
+a:focus-visible,button:focus-visible,textarea:focus-visible{outline:4px solid var(--yel);outline-offset:2px}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.chip{background:var(--card)!important;color:var(--ink)!important;border:3px solid var(--line)}.chip.on{border-color:var(--pink);background:var(--pink)!important;color:#fff!important}
+textarea{width:100%;min-height:12rem;font:inherit;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1rem;padding:.8rem;border-radius:.8rem;border:3px solid var(--line);background:var(--card);color:var(--ink);resize:vertical}
+.fb{padding:.6rem 1rem;border-radius:.8rem;margin:.8rem 0;font-weight:700}.good{background:#D7F7E8;color:#0B5F43}.bad{background:#FFE1E8;color:#8F1238}
+.opts{display:grid;gap:.7rem;margin:1rem 0}
+.opt{text-align:left;background:var(--card);color:var(--ink);border:3px solid var(--line);border-radius:1rem}
+.opt:disabled{opacity:1;cursor:default;transform:none}.right{background:var(--mint)!important;color:#fff!important;border-color:var(--mint)}.wrong{background:var(--pink)!important;color:#fff!important;border-color:var(--pink)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-bottom:1.4rem}
+.st{border-radius:1rem;padding:.8rem 1rem;color:#fff;background:var(--c)}.st b{font-size:1.8rem;display:block;line-height:1.3}
+.mut{color:var(--mut)}.big{font-size:3rem;text-align:center;margin:.5rem}
+ul.log{padding:0;list-style:none;margin:0}ul.log li{padding:.4rem 0;border-bottom:2px dashed var(--line)}
+@media(prefers-reduced-motion:no-preference){.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}.pop{animation:pp .5s}@keyframes pp{50%{transform:scale(1.04)}}}
+.cf{position:fixed;top:-24px;width:12px;height:18px;border-radius:3px;z-index:99;pointer-events:none;animation:cf var(--d) ease-in forwards}
+@keyframes cf{to{transform:translate(var(--x),108vh) rotate(720deg)}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="logo">M↓</div>
+<div><h1>Markdown 探險樂園</h1></div>
+<div class="prog"><div id="lv" style="font-weight:700"></div><div class="bar"><i id="tp"></i></div></div>
+</div></header>
+<div class="wrap">
+<nav>
+<a data-v="learn" href="#learn" style="--c:var(--blue)">📖 教學</a>
+<a data-v="practice" href="#practice" style="--c:var(--pink)">✏️ 練習</a>
+<a data-v="quiz" href="#quiz" style="--c:var(--mint)">🏆 測驗</a>
+<a data-v="history" href="#history" style="--c:var(--vio)">📈 學習歷程</a>
+
+</nav>
+<main>
+<section id="v-learn"><div id="lessons"></div></section>
+<section id="v-practice" hidden>
+<div class="chips" id="chips"></div>
+<div class="card" style="--c:var(--pink)">
+<h2 id="pt"></h2><p id="pg"></p>
+<div class="two"><div><b>✍️ 在這裡輸入 Markdown</b><textarea id="pin" placeholder="開始輸入吧…"></textarea></div>
+<div><b>👀 即時預覽</b><div class="out" id="pout"></div></div></div>
+<div id="pfb"></div>
+<p><button id="pck" style="--c:var(--pink)">✅ 檢查答案</button> <button id="phn" class="ghost">💡 提示</button> <button id="pcl" class="ghost">🔄 清除重練</button></p>
+</div></section>
+<section id="v-quiz" hidden><div class="card" style="--c:var(--mint)" id="qbox"></div></section>
+<section id="v-history" hidden>
+<div class="card" style="--c:var(--vio)"><h2 id="hl"></h2><div class="bar"><i id="hp" style="background:var(--vio);width:0"></i></div></div>
+<div class="stats" id="stats"></div>
+<div class="card" style="--c:var(--yel)"><h3>📝 最近的學習紀錄</h3><ul class="log" id="log"></ul><p><button id="rst" class="ghost">🗑 清除所有紀錄</button></p></div>
+</section>
+</main>
+<p class="mut" style="text-align:center;padding:1rem 0">學習紀錄只會保存在這台裝置的瀏覽器中。</p>
+</div>
+<script>
+const $=s=>document.querySelector(s),L=(...a)=>a.join('\n');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+/* ---------- 迷你 Markdown 轉換器 ---------- */
+function inl(s){s=esc(s);
+return s.replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/~~([^~]+)~~/g,'<del>$1</del>')
+.replace(/(^|[^*\w])\*([^*\s][^*]*)\*/g,'$1<em>$2</em>').replace(/(^|\W)_([^_]+)_/g,'$1<em>$2</em>')
+.replace(/!\[([^\]]*)\]\(([^)]*)\)/g,'<span class="img">🖼 $1</span>')
+.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g,(m,t,u)=>/^(https?:|mailto:)/.test(u)?'<a href="'+u+'" target="_blank" rel="noopener">'+t+'</a>':'<a>'+t+'</a>')}
+function md(src){const A=src.split('\n');let o='',i=0,m;
+while(i<A.length){const l=A[i];
+if(/^```/.test(l)){const b=[];i++;while(i<A.length&&!/^```/.test(A[i]))b.push(A[i++]);i++;o+='<pre><code>'+esc(b.join('\n'))+'</code></pre>';continue}
+if(m=l.match(/^(#{1,6})\s+(.*)/)){o+='<h'+m[1].length+'>'+inl(m[2])+'</h'+m[1].length+'>';i++;continue}
+if(/^(-{3,}|\*{3,})\s*$/.test(l)){o+='<hr>';i++;continue}
+if(/^>\s?/.test(l)){const b=[];while(i<A.length&&/^>\s?/.test(A[i]))b.push(A[i++].replace(/^>\s?/,''));o+='<blockquote>'+inl(b.join('<br>'))+'</blockquote>';continue}
+if(/^\s*([-*+]|\d+\.)\s+/.test(l)){const ord=/^\s*\d+\./.test(l);let b='';
+while(i<A.length&&(m=A[i].match(/^\s*(?:[-*+]|\d+\.)\s+(.*)/))){const c=m[1].match(/^\[([ xX])\]\s+(.*)/);b+=c?'<li class="task"><input type="checkbox" disabled '+(c[1]!==' '?'checked':'')+'> '+inl(c[2])+'</li>':'<li>'+inl(m[1])+'</li>';i++}
+o+=ord?'<ol>'+b+'</ol>':'<ul>'+b+'</ul>';continue}
+if(l.includes('|')&&/^\s*\|?\s*:?-{2,}/.test(A[i+1]||'')){const row=r=>r.trim().replace(/^\||\|$/g,'').split('|').map(x=>inl(x.trim()));const h=row(l);i+=2;let rs='';
+while(i<A.length&&A[i].includes('|'))rs+='<tr>'+row(A[i++]).map(x=>'<td>'+x+'</td>').join('')+'</tr>';
+o+='<table><thead><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+rs+'</tbody></table>';continue}
+if(!l.trim()){i++;continue}
+const b=[];while(i<A.length&&A[i].trim()&&!/^(```|#{1,6}\s|>|\s*([-*+]|\d+\.)\s)/.test(A[i]))b.push(A[i++]);
+if(!b.length)b.push(A[i++]);o+='<p>'+inl(b.join('<br>'))+'</p>'}
+return o}
+function burst(n){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const c=['#2F7BFF','#F0407A','#FFC83D','#12A878','#7B52F0'];for(let i=0;i<n;i++){const e=document.createElement('i');e.className='cf';e.style.cssText='left:'+Math.random()*100+'vw;background:'+c[i%5]+';--x:'+(Math.random()*200-100)+'px;--d:'+(1.8+Math.random()*1.6)+'s;animation-delay:'+Math.random()*.4+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),4400)}}
+/* ---------- 音效 ---------- */
+let AC;function tone(f,d,t,s,v){if(!S.snd)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime+(s||0);o.type=t||'sine';o.frequency.value=f;g.gain.setValueAtTime(v||.15,n);g.gain.exponentialRampToValueAtTime(.001,n+d);o.connect(g);g.connect(AC.destination);o.start(n);o.stop(n+d)}catch(e){}}
+const snd={click:()=>tone(700,.07),ok:()=>{tone(523,.12);tone(659,.12,'sine',.1);tone(784,.22,'sine',.2)},no:()=>tone(180,.3,'sawtooth',0,.08),win:()=>[523,659,784,1047,1319].forEach((f,i)=>tone(f,.25,'triangle',i*.12))};
+/* ---------- 資料儲存 ---------- */
+let S={read:{},done:{},att:0,quiz:[],log:[],snd:1};
+try{const r=localStorage.getItem('mdlab');if(r)S=Object.assign(S,JSON.parse(r))}catch(e){}
+const save=()=>{try{localStorage.setItem('mdlab',JSON.stringify(S))}catch(e){}};
+function log(m){S.log.unshift({t:Date.now(),m});S.log=S.log.slice(0,40);save();top_()}
+/* ---------- 教學內容 ---------- */
+const LS=[
+['🔠','標題（Headers）','--blue','在文字前面加上 # 就會變成標題，# 越多，標題越小，最多六個（H1~H6）。# 後面必須要空半形空格。',L('# H1 最大的標題','## H2 標題','### H3 標題','#### H4 標題','##### H5 標題','###### H6 最小的標題')],
+['💪','強調文字（Emphasis）','--pink','用星號包住文字可以改變樣式：兩個星號是粗體，一個星號是斜體，兩個波浪號是刪除線；用反引號 ` 包住文字，會變成框框字。',L('**粗體文字**','*斜體文字*','***又粗又斜***','~~刪除線~~','`文字`')],
+['📋','列表（Lists）','--mint','無序列表用 - 開頭；有序列表用「數字 + 句點」開頭。符號後面要空半形空格。',L('- 蘋果','- 香蕉','- 葡萄','','1. 起床','2. 刷牙','3. 上學')],
+['🔗','超連結與圖片（Links & Images）','--vio','連結寫成 [顯示文字](網址)。圖片的寫法一樣，只是前面多一個 !。（本站不載入外部圖片，所以預覽只會顯示圖片說明。）',L('[前往維基百科](https://zh.wikipedia.org)','','![小貓的照片](cat.png)')],
+['💬','引用與分隔線（Quotes）','--blue','句首加 > 變成引用區塊；單獨一行三個減號 --- 會畫出分隔線。',L('> 學而時習之，不亦說乎？','','---','','上面是一條分隔線')],
+['📊','表格與待辦（Tables & Task Lists）','--mint','用 | 分隔欄位，第二行用 --- 表示標題列結束。項目前加上 [ ] 或 [x]，就變成待辦事項。',L('| 水果 | 價格 |','|------|------|','| 蘋果 | 30 |','| 香蕉 | 20 |','','- [x] 完成教學','- [ ] 完成測驗')]];
+function rLessons(){$('#lessons').innerHTML=LS.map((l,i)=>`<article class="card" style="--c:var(${l[2]})"><h2>${l[0]} 第 ${i+1} 課：${l[1]}</h2><p>${esc(l[3])}</p><div class="two"><div><b>原始碼</b><pre><code>${esc(l[4])}</code></pre></div><div><b>顯示結果</b><div class="out md">${md(l[4])}</div></div></div><button data-i="${i}" class="mk ${S.read[i]?'done':''}">${S.read[i]?'✅ 已學會':'我學會了！'}</button></article>`).join('');
+document.querySelectorAll('.mk').forEach(b=>b.onclick=()=>{const i=b.dataset.i;if(S.read[i]){delete S.read[i];save()}else{S.read[i]=1;snd.ok();burst(Object.keys(S.read).length===LS.length?90:0);log('學會了第 '+(+i+1)+' 課：'+LS[i][1])}rLessons()})}
+/* ---------- 練習 ---------- */
+const EX=[
+['標題','同時寫出一個一級標題和一個三級標題。','一級標題：# 標題文字　三級標題：### 標題文字。# 後面都必須空一個半形空格。',[['一級標題（# 文字）',s=>/^#\s+\S/m.test(s)],['三級標題（### 文字）',s=>/^###\s+\S/m.test(s)]]],
+['強調文字','在同一份內容裡，同時寫出：斜體、粗斜體、刪除線、框框字。','斜體：*文字*　粗斜體：***文字***　刪除線：~~文字~~　框框字：`文字`（用反引號）',[['斜體（*文字*）',s=>/\*[^*\n]+\*|(^|\W)_[^_\n]+_/.test(s.replace(/\*\*\*[^*\n]+\*\*\*/g,'').replace(/\*\*[^*\n]+\*\*/g,''))],['粗斜體（***文字***）',s=>/\*\*\*[^*\n]+\*\*\*/.test(s)],['刪除線（~~文字~~）',s=>/~~[^~\n]+~~/.test(s)],['框框字（`文字`）',s=>/`[^`\n]+`/.test(s)]]],
+['條列點','建立至少 3 個條列點（無序列表）。','每一行以「- 」開頭，再空一個半形空格，例如：- 蘋果',s=>(s.match(/^\s*[-*+]\s+\S/gm)||[]).length>=3],
+['引用','寫出一段引用文字。','句首加上 > ，再空一個半形空格，接著寫文字，例如：> 學而時習之',s=>/^>\s?\S/m.test(s)],
+['連結','寫出一個連結，要有顯示文字與網址。','[顯示文字](https://example.com)',s=>/\[[^\]]+\]\([^)\s]+\)/.test(s)],
+['表格','建立一個至少有兩列資料的表格。','標題列、「|---|---|」分隔列，再加兩列資料。',s=>{const r=s.split('\n').filter(x=>x.includes('|'));return r.length>=4&&/^\s*\|?\s*:?-{2,}/.test(r[1]||'')}]];
+let cur=0;
+function pChips(){$('#chips').innerHTML=EX.map((e,i)=>`<button class="chip ${i===cur?'on':''}" data-i="${i}">${S.done[i]?'✅ ':''}${i+1}. ${e[0]}</button>`).join('');document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>pSel(+b.dataset.i))}
+function pSel(i){cur=i;$('#pt').textContent='練習 '+(i+1)+'：'+EX[i][0];$('#pg').textContent='🎯 '+EX[i][1];$('#pin').value='';pUp();$('#pfb').innerHTML='';pChips()}
+function pUp(){const v=$('#pin').value;$('#pout').innerHTML=v.trim()?md(v):'<p class="mut">預覽會顯示在這裡。</p>'}
+$('#pin').oninput=pUp;
+$('#phn').onclick=()=>{$('#pfb').innerHTML='<p class="fb" style="background:var(--yel);color:#1D2540">💡 '+esc(EX[cur][2])+'</p>'};
+$('#pcl').onclick=()=>{$('#pin').value='';pUp();$('#pfb').innerHTML=''};
+$('#pck').onclick=()=>{S.att++;const v=$('#pin').value,f3=EX[cur][3],r=(typeof f3==='function'?[[EX[cur][1],f3]]:f3).map(c=>[c[0],c[1](v)]),ok=r.every(x=>x[1]),ck='<ul style="margin:.3rem 0 0;padding-left:1.4rem;font-weight:400">'+r.map(x=>'<li>'+(x[1]?'✅ ':'⬜ ')+esc(x[0])+'</li>').join('')+'</ul>';
+if(ok){const first=!S.done[cur];S.done[cur]=1;snd.ok();burst(Object.keys(S.done).length===EX.length&&first?90:25);log((first?'完成練習：':'再次通過練習：')+EX[cur][0]);
+$('#pfb').innerHTML='<div class="fb good pop">🎉 全部答對了！'+ck+(cur<EX.length-1?'<button class="btn" id="pn" style="margin-top:.6rem;--c:var(--mint)">下一題</button>':'<p style="margin:.4rem 0 0">你完成所有練習啦！</p>')+'</div>';
+const n=$('#pn');if(n)n.onclick=()=>pSel(cur+1)}
+else{snd.no();log('練習未通過：'+EX[cur][0]);const f=$('#pfb');f.innerHTML='<div class="fb bad shake">還差一點！檢查清單：'+ck+'<span style="font-weight:400">想不到怎麼寫？按「提示」看看。</span></div>'}
+pChips()};
+/* ---------- 測驗 ---------- */
+const QZ=[
+['哪一種寫法會產生「二級標題」？',['# 標題','## 標題','### 標題','** 標題'],1,'兩個 # 代表二級標題。'],
+['要讓文字變成粗體，應該怎麼寫？',['*文字*','~~文字~~','**文字**','>文字'],2,'兩個星號包住文字是粗體，一個星號是斜體。'],
+['哪一種寫法是「有序列表」？',['- 蘋果','1. 蘋果','> 蘋果','# 蘋果'],1,'數字加句點再空一格，就是有序列表。'],
+['連結的正確寫法是？',['[Google](https://google.com)','(Google)[https://google.com]','<Google>(https://google.com)','{Google}(https://google.com)'],0,'中括號放顯示文字，小括號放網址。'],
+['圖片語法和連結語法差在哪裡？',['圖片要用大括號','圖片前面多一個 !','圖片要用兩個中括號','沒有差別'],1,'在連結語法前加上 ! 就是圖片。'],
+['哪個符號可以產生「引用區塊」？',['>','|','//','%'],0,'句首加 > 並空一格，就是引用。'],
+['要讓文字變成「框框字」，要用什麼符號包住？',['單引號 \'','反引號 `','井字號 #','底線 _'],1,'一個反引號 ` 包住文字，就會變成框框字。'],
+['表格的標題列下面，必須有哪一行？',['空白行','|---|---| 這類分隔列','# 標題','> 引用'],1,'分隔列用來告訴 Markdown 標題列到此結束。'],
+['想畫一條分隔線，可以單獨寫一行？',['---','///','+++-','~~'],0,'三個以上的減號，就會變成分隔線。'],
+['待辦事項「已完成」的項目怎麼寫？',['- [ ] 項目','- [x] 項目','- (x) 項目','x - 項目'],1,'[x] 代表已勾選，[ ] 代表未勾選。']];
+let Q={};
+function qHome(){const b=S.quiz.length?Math.max(...S.quiz):null;$('#qbox').innerHTML=`<h2>🏆 Markdown 小測驗</h2><p>共 ${QZ.length} 題選擇題，題目順序每次都不同。${b!==null?'你的最高分是 <b>'+b+' / '+QZ.length+'</b>。':''}</p><button class="btn" id="qs" style="--c:var(--mint)">🚀 開始測驗</button>`;$('#qs').onclick=qStart}
+function qStart(){Q={o:[...QZ.keys()].sort(()=>Math.random()-.5),i:0,s:0,d:false};qShow()}
+function qShow(){if(Q.i>=Q.o.length)return qEnd();const q=QZ[Q.o[Q.i]];Q.d=false;
+$('#qbox').innerHTML=`<div class="bar"><i style="width:${Q.i/Q.o.length*100}%;background:var(--mint)"></i></div><p class="mut">第 ${Q.i+1} / ${Q.o.length} 題　目前得分 ${Q.s}</p><h3>${esc(q[0])}</h3><div class="opts">${q[1].map((t,j)=>`<button class="opt" data-j="${j}">${esc(t)}</button>`).join('')}</div><div id="fb"></div>`;
+document.querySelectorAll('.opt').forEach(x=>x.onclick=()=>qAns(+x.dataset.j))}
+function qAns(j){if(Q.d)return;Q.d=true;const q=QZ[Q.o[Q.i]],ok=j===q[2];if(ok){Q.s++;snd.ok()}else snd.no();
+document.querySelectorAll('.opt').forEach((x,k)=>{x.disabled=true;if(k===q[2])x.classList.add('right');else if(k===j)x.classList.add('wrong')});
+$('#fb').innerHTML=`<p class="fb ${ok?'good':'bad'}">${ok?'🎉 答對了！':'💡 正確答案是第 '+(q[2]+1)+' 個。'}${esc(q[3])}</p><button class="btn" id="nx" style="--c:var(--mint)">${Q.i+1<Q.o.length?'下一題':'看成績'}</button>`;
+$('#nx').onclick=()=>{Q.i++;qShow()}}
+function qEnd(){const n=Q.o.length,p=Q.s/n;S.quiz.push(Q.s);log('完成測驗：'+Q.s+' / '+n+' 分');(p>=.8?snd.win:snd.ok)();burst(p===1?120:p>=.8?70:0);
+const st=p===1?'🌟🌟🌟':p>=.8?'🌟🌟':p>=.5?'🌟':'🌱';
+$('#qbox').innerHTML=`<div class="big pop">${st}</div><h2 style="text-align:center">${Q.s} / ${n} 分</h2><p style="text-align:center">${p>=.8?'太棒了！你已經掌握 Markdown 的基本功。':p>=.5?'不錯喔！回到教學複習一下，再挑戰一次吧。':'別氣餒，先到教學與練習熟悉一下，再來挑戰！'}</p><p style="text-align:center"><button class="btn" id="qa" style="--c:var(--mint)">🔁 再測一次</button> <a class="btn" href="#history" style="--c:var(--vio);text-decoration:none;display:inline-block">📈 看學習歷程</a></p>`;
+$('#qa').onclick=qStart}
+/* ---------- 學習歷程 ---------- */
+function pct(){const r=Object.keys(S.read).length/LS.length,d=Object.keys(S.done).length/EX.length,q=S.quiz.length?Math.max(...S.quiz)/QZ.length:0;return Math.round((r+d+q)/3*100)}
+function lvl(p){return p>=100?'🏆 Markdown 大師':p>=70?'🌸 盛開的花':p>=40?'🌷 花苞':p>=15?'🌿 小嫩芽':''}
+function top_(){const p=pct();$('#tp').style.width=p+'%';$('#lv').textContent=(lvl(p)?lvl(p)+'　':'')+'進度 '+p+'%'}
+function rHist(){const p=pct(),b=S.quiz.length?Math.max(...S.quiz):0;$('#hl').textContent=(lvl(p)?lvl(p)+'　':'')+'總進度 '+p+'%';$('#hp').style.width=p+'%';
+const c=[['已學單元',Object.keys(S.read).length+' / '+LS.length,'--blue'],['完成練習',Object.keys(S.done).length+' / '+EX.length,'--pink'],['檢查次數',S.att,'--vio'],['測驗最高分',b+' / '+QZ.length,'--mint'],['測驗次數',S.quiz.length,'--blue']];
+$('#stats').innerHTML=c.map(x=>`<div class="st" style="--c:var(${x[2]})">${x[0]}<b>${x[1]}</b></div>`).join('');
+$('#log').innerHTML=S.log.length?S.log.map(e=>`<li><span class="mut">${new Date(e.t).toLocaleString('zh-TW',{hour12:false})}</span>　${esc(e.m)}</li>`).join(''):'<li class="mut">還沒有紀錄。先去讀一課、做一題練習吧！</li>'}
+let rc=0;$('#rst').onclick=function(){if(!rc){rc=1;this.textContent='再按一次確認清除';setTimeout(()=>{rc=0;this.textContent='🗑 清除所有紀錄'},3500);return}
+rc=0;S={read:{},done:{},att:0,quiz:[],log:[],snd:S.snd};save();this.textContent='🗑 清除所有紀錄';rLessons();pChips();qHome();top_();rHist()};
+/* ---------- 導覽與初始化 ---------- */
+const V=['learn','practice','quiz','history'];
+function show(v){if(!V.includes(v))v='learn';V.forEach(x=>{$('#v-'+x).hidden=x!==v;document.querySelector('[data-v="'+x+'"]').classList.toggle('on',x===v)});if(v==='history')rHist();window.scrollTo(0,0)}
+addEventListener('hashchange',()=>show(location.hash.slice(1)));
+document.addEventListener('click',e=>{if(e.target.closest('button,nav a'))snd.click()});
+S.snd=1;rLessons();pSel(0);qHome();top_();show(location.hash.slice(1));
+</script>
+</body>
+</html>
